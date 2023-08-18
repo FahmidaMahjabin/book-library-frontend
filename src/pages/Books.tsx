@@ -1,47 +1,45 @@
-import ProductCard from '@/components/ProductCard';
+import BookCard from '@/components/BookCard';
+
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
-import { useGetProductsQuery } from '@/redux/api/apiSlice';
-import {
-  setPriceRange,
-  setToggle,
-} from '@/redux/features/product/productSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { IProduct } from '@/types/globalTypes';
-import { useEffect, useState } from 'react';
+import { useGetBooksQuery } from '@/redux/api/apiSlice';
 
-export default function Products() {
-  const { price, rating, status } = useAppSelector((state) => state.product);
-  const dispatch = useAppDispatch();
-  // const [data, setData] = useState<IProduct[]>([]);
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { IBook } from '@/types/globalTypes';
+
+export default function Books() {
+  // const { price, rating, status } = useAppSelector((state) => state.book);
+  // const dispatch = useAppDispatch();
+  // const [data, setData] = useState<Ibook[]>([]);
   // useEffect(() => {
   //   fetch('./data.json')
   //     .then((res) => res.json())
   //     .then((data) => setData(data));
   // }, []);
-  const { data, isLoading } = useGetProductsQuery(undefined);
-  console.log('data:', data.data);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data, isLoading } = useGetBooksQuery(undefined);
+  console.log('data:', data);
 
-  const { toast } = useToast();
+  // const { toast } = useToast();
 
   const handleSlider = (value: number[]) => {
     console.log(value);
-    dispatch(setPriceRange(value[0]));
+    // dispatch(setPriceRange(value[0]));
   };
 
-  let productsData;
+  // let booksData;
 
-  if (status) {
-    productsData = data?.data?.filter(
-      (item) => item.status === true && item.price < price
-    );
-  } else if (price > 0) {
-    productsData = data.?data?.filter((item) => item.price < price);
-  } else {
-    productsData = data?.data;
-  }
+  // if (status) {
+  //   booksData = data?.data?.filter(
+  //     (item: IBook) => item.status === true && item.price < price
+  //   );
+  // } else if (price > 0) {
+  //   booksData = data.?data?.filter((item) => item.price < price);
+  // } else {
+  //   booksData = data?.data;
+  // }
 
   return (
     <div className="grid grid-cols-12 max-w-7xl mx-auto relative ">
@@ -49,7 +47,7 @@ export default function Products() {
         <div>
           <h1 className="text-2xl uppercase">Availability</h1>
           <div
-            onClick={() => dispatch(setToggle())}
+            // onClick={() => dispatch(setToggle())}
             className="flex items-center space-x-2 mt-3"
           >
             <Switch id="in-stock" />
@@ -67,12 +65,12 @@ export default function Products() {
               onValueChange={(value) => handleSlider(value)}
             />
           </div>
-          <div>From 0$ To {price}$</div>
+          <div>From 0$ To price$</div>
         </div>
       </div>
       <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
-        {productsData?.map((product) => (
-          <ProductCard product={product} />
+        {data?.data.map((book: IBook) => (
+          <BookCard Book={book} />
         ))}
       </div>
     </div>

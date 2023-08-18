@@ -3,11 +3,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:4000/academic-semester/get-semester',
+    baseUrl: 'http://localhost:5000/',
   }),
   endpoints: (builder) => ({
-    getProducts: builder.query({
-      query: () => '/products',
+    getBooks: builder.query({
+      query: () => 'book/all-books',
     }),
 
     singleProduct: builder.query({
@@ -24,7 +24,7 @@ export const api = createApi({
   }),
 });
 export const {
-  useGetProductsQuery,
+  useGetBooksQuery,
   useSingleProductQuery,
   usePostCommentMutation,
 } = api;
