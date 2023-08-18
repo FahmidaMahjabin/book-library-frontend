@@ -16,10 +16,11 @@ import logo from '../assets/images/technet-logo.png';
 export default function Navbar() {
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
-      <div className="h-full w-full bg-white/60">
+      <div className="h-full w-full bg-gray-500">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
           <div>
-            <img className="h-8" src={logo} alt="log" />
+            {/* <img className="h-8" src={logo} alt="log" /> */}
+            <h1 className="text-3xl font-bold">Book Worm</h1>
           </div>
           <div>
             <ul className="flex items-center">
@@ -35,18 +36,18 @@ export default function Navbar() {
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/log-in">LogIn</Link>
+                  <Link to="/login">LogIn</Link>
                 </Button>
               </li>
-              <li>
+              {/* <li>
                 <Button variant="ghost">
                   <HiOutlineSearch size="25" />
                 </Button>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Cart />
-              </li>
-              <li className="ml-5">
+              </li> */}
+              {/* <li className="ml-5">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="outline-none">
                     <Avatar>
@@ -71,7 +72,7 @@ export default function Navbar() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
