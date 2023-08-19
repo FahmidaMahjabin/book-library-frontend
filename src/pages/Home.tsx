@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import banner from '@/assets/images/banner.png';
+import banner from '@/assets/images/library.jpg';
 import hero from '@/assets/images/hero.png';
 import { Link } from 'react-router-dom';
 import Footer from '@/layouts/Footer';
@@ -7,17 +7,18 @@ import Footer from '@/layouts/Footer';
 export default function Home() {
   return (
     <>
-      <div className="flex justify-between items-center h-[calc(100vh-80px)] max-w-7xl mx-auto ">
+      <div className="mt-16 grid grid-cols-2 gap-4  max-w-7xl mx-auto ">
         <div>
-          <h1 className="text-6xl font-black text-primary mb-2">
-            HAYLOU <br /> SOLAR PLUSE
-          </h1>
+          <h1 className="text-6xl font-black text-primary mb-2">Book Worm</h1>
           <p className="text-secondary font-semibold text-xl">
-            Effortless communication at your fingertips
+            "Today a reader, tomorrow a leader." – Margaret Fuller
           </p>
           <div className="text-primary mt-20">
-            <p>Bluetooth 5.2 for easy, secure communication</p>
-            <p>Precise 143 Amoled display for clear visuals</p>
+            <p>
+              Books and doors are the same thing. You open them, and you go
+              through into another world.
+            </p>
+            <p>Once you learn to read, you will be forever free.</p>
           </div>
           <Button className="mt-5">Learn more</Button>
         </div>
@@ -25,20 +26,10 @@ export default function Home() {
           <img src={banner} alt="" />
         </div>
       </div>
-      <div className="mb-96">
-        <div>
-          <img className="mx-auto" src={hero} alt="" />
-        </div>
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="text-5xl font-black text-primary uppercase mt-10">
-            The future of tech is here
-          </h1>
-          <Button className="mt-10" asChild>
-            <Link to="/products">Brows all products</Link>
-          </Button>
-        </div>
+
+      <div className="mt-16">
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

@@ -10,8 +10,8 @@ export const api = createApi({
       query: () => 'book/all-books',
     }),
 
-    singleProduct: builder.query({
-      query: (id) => `/product/${id}`,
+    singleBook: builder.query({
+      query: (id) => `/book/${id}`,
     }),
 
     postComment: builder.mutation({
@@ -23,8 +23,5 @@ export const api = createApi({
     }),
   }),
 });
-export const {
-  useGetBooksQuery,
-  useSingleProductQuery,
-  usePostCommentMutation,
-} = api;
+export const { useGetBooksQuery, useSingleBookQuery, usePostCommentMutation } =
+  api;

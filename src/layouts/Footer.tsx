@@ -6,11 +6,12 @@ export default function Footer() {
   const year = date.getFullYear();
 
   return (
-    <div className="bg-[#242630] text-secondary p-20">
+    <div className="bg-gray-900 text-secondary p-20">
       <div className="flex justify-between">
-        <div>
+        {/* <div>
           <img className="h-10" src={logo} alt="Logo" />
-        </div>
+        </div> */}
+        <p className="text-3xl font-bold ">Book Worm</p>
         <div className="flex gap-20">
           <ul className="space-y-2">
             <li>Upcoming</li>
@@ -34,7 +35,7 @@ export default function Footer() {
       <div className="flex w-full mt-20 gap-5">
         <p>Privacy Policy</p>
         <p>Terms & Condition</p>
-        <p className="ml-auto"> &#169; TechNet {year}</p>
+        <p className="ml-auto"> &#169; bookWorm {year}</p>
       </div>
     </div>
   );
