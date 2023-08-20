@@ -20,6 +20,8 @@ export default function BookCard({ Book }: IProps) {
       description: 'Book Added',
     });
   };
+  console.log('year:');
+  const id = Book._id;
   return (
     <div>
       <div className="rounded-2xl h-[480px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
@@ -31,9 +33,16 @@ export default function BookCard({ Book }: IProps) {
         <h4>Genre: {Book.genre}</h4>
         <h4>Publication Date: {Book.publicationDate}</h4>
 
-        <Button variant="default" onClick={() => handleAddBook(Book)}>
-          Add to cart
-        </Button>
+        {/* <Button variant="default" onClick={() => }>
+          Detail
+        </Button> */}
+
+        <Link
+          to={`/bookDetail/${id}`}
+          className="bg-green-600 px-8 py-2 rounded font-bold"
+        >
+          Detail
+        </Link>
       </div>
     </div>
   );
