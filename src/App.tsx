@@ -1,10 +1,10 @@
 import { Toaster } from './components/ui/Toaster';
 import MainLayout from './layouts/MainLayout';
-
+import { ToastContainer } from 'react-toast';
 function App() {
   return (
     <div>
-      <Toaster />
+      <ToastContainer></ToastContainer>
       <MainLayout />
     </div>
   );

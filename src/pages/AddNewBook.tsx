@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { DatePickerWithPresets } from '@/components/ui/datePickerWithPreset';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
+
 import { usePostABookMutation } from '@/redux/api/apiSlice';
 import {
   setAuthor,
@@ -17,6 +18,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 // import { Icart } from '@/types/globalTypes';
 
 import { useState } from 'react';
+import { toast } from 'react-toast';
 
 export default function AddNewBook() {
   const dispatch = useAppDispatch();
@@ -100,7 +102,8 @@ export default function AddNewBook() {
               postBook(data);
               console.log(isLoading, isSuccess, isError);
               if (isSuccess) {
-                console.log('successfully create a book');
+                toast.success('A new Book Added');
+                console.log('toast');
               }
             }}
           >
