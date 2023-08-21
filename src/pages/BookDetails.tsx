@@ -4,14 +4,14 @@ import Navbar from '@/layouts/Navbar';
 import { useSingleBookQuery } from '@/redux/api/apiSlice';
 // import { Ibook } from '@/types/globalTypes';
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function BookDetails() {
   const { id } = useParams();
 
   const result = useSingleBookQuery(id);
   const book = result?.data?.data;
-
+  const navigate = useNavigate();
   return (
     <>
       <div>
@@ -28,7 +28,9 @@ export default function BookDetails() {
               <li>{review}</li>
             ))}
           </ul>
-          <Button>Edit Book</Button>
+          <Button onClick={() => navigate(`/edit-book/${book?._id}`)}>
+            Edit Book
+          </Button>
           <br></br>
           <Button>Delete Book</Button>
         </div>

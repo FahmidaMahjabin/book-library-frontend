@@ -10,6 +10,7 @@ import ProductDetails from '@/pages/BookDetails';
 import Books from '@/pages/Books';
 import BookDetails from '@/pages/BookDetails';
 import AddNewBook from '@/pages/AddNewBook';
+import EditBook from '@/pages/EditBook';
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/edit-book/:id',
+    element: <EditBook></EditBook>,
   },
   {
     path: '/add-new-book',

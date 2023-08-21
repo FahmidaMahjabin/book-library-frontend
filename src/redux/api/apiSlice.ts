@@ -14,10 +14,10 @@ export const api = createApi({
       query: (id) => `/book/${id}`,
     }),
 
-    postComment: builder.mutation({
+    editBook: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/comment/${id}`,
-        method: 'POST',
+        url: `/book/${id}`,
+        method: 'PATCH',
         body: data,
       }),
     }),
@@ -34,6 +34,6 @@ export const api = createApi({
 export const {
   useGetBooksQuery,
   useSingleBookQuery,
-  usePostCommentMutation,
+  useEditBookMutation,
   usePostABookMutation,
 } = api;
