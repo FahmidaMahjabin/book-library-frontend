@@ -21,7 +21,19 @@ export const api = createApi({
         body: data,
       }),
     }),
+
+    postABook: builder.mutation({
+      query: (data) => ({
+        url: 'book/add-book',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
-export const { useGetBooksQuery, useSingleBookQuery, usePostCommentMutation } =
-  api;
+export const {
+  useGetBooksQuery,
+  useSingleBookQuery,
+  usePostCommentMutation,
+  usePostABookMutation,
+} = api;

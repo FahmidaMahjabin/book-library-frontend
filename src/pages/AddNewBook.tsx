@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
+import { usePostABookMutation } from '@/redux/api/apiSlice';
 import {
   setAuthor,
   setGenre,
@@ -22,9 +23,7 @@ export default function AddNewBook() {
   const { title, author, genre, publicationDate, reviews } = useAppSelector(
     (state) => state.book
   );
-  const handleSubmit = () => {
-    console.log(title, author, genre, publicationDate, reviews);
-  };
+  const [postBook, { isLoading, isSuccess, isError }] = usePostABookMutation();
   return (
     <div className="flex justify-center items-center h-[calc(100vh-80px)] gap-10 text-primary">
       <div className="max-w-3xl w-full">
@@ -91,7 +90,20 @@ export default function AddNewBook() {
             />
           </div>
 
-          <Button className="w-full m-2" onClick={() => handleSubmit()}>
+          <Button
+            className="w-full m-2"
+            onClick={() => {
+              const data = { title, author, genre, publicationDate, reviews };
+
+              // eslint-disable-next-line react-hooks/rules-of-hooks
+
+              postBook(data);
+              console.log(isLoading, isSuccess, isError);
+              if (isSuccess) {
+                console.log('successfully create a book');
+              }
+            }}
+          >
             Submit
           </Button>
         </div>
