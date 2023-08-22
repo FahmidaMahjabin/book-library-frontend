@@ -29,12 +29,21 @@ export default function EditBook() {
   const { title, author, genre, publicationDate, reviews } = useAppSelector(
     (state) => state.book
   );
+
+  console.log('title:', title, 'author:', author, 'reviews:', reviews);
   const [editBook, { isLoading, isSuccess, isError }] = useEditBookMutation();
   const { id } = useParams();
   console.log('id:', id);
   const { data } = useSingleBookQuery(id);
   //   console.log('data from editbook:', data);
   const book = data?.data;
+  //   change the state values for the field
+  dispatch(setTitle(book.title));
+  dispatch(setAuthor(book.author));
+  dispatch(setPublicationDate(book.publicationDate));
+  dispatch(setGenre(book.genre));
+  //   dispatch(setReviews(book.reviews));
+  book.reviews?.map((review: string) => dispatch(setReviews(review)));
   return (
     <div className="flex justify-center items-center h-[calc(100vh-80px)] gap-10 text-primary">
       <div className="max-w-3xl w-full">
@@ -48,8 +57,8 @@ export default function EditBook() {
                   type="text"
                   id="title"
                   className="mt-2"
-                  value={book.title}
-                  onBlur={(event) => {
+                  value={title}
+                  onChange={(event) => {
                     dispatch(setTitle(event.target.value));
                   }}
                 />
@@ -59,7 +68,7 @@ export default function EditBook() {
                 <Input
                   type="text"
                   id="author"
-                  value={book.author}
+                  value={author}
                   className="mt-2"
                   onBlur={(event) => {
                     dispatch(setAuthor(event.target.value));
@@ -73,7 +82,7 @@ export default function EditBook() {
                 <Input
                   type="text"
                   id="genre"
-                  value={book.genre}
+                  value={genre}
                   className="mt-2"
                   onBlur={(event) => {
                     dispatch(setGenre(event.target.value));
@@ -86,7 +95,7 @@ export default function EditBook() {
                   type="text"
                   id="publicationDate"
                   className="mt-2"
-                  value={book.publicationDate}
+                  value={publicationDate}
                   onBlur={(event) => {
                     dispatch(setPublicationDate(event.target.value));
                   }}
@@ -113,7 +122,7 @@ export default function EditBook() {
 
               // eslint-disable-next-line react-hooks/rules-of-hooks
 
-              editBook(data);
+              editBook({ id, data });
               console.log(isLoading, isSuccess, isError);
               if (isSuccess) {
                 toast.success('A new Book Added');
