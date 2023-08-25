@@ -6,24 +6,31 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useForm } from 'react-hook-form';
+import { useAppDispatch } from '@/redux/hooks';
+import { createUser } from '@/redux/features/user/userSlice';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
-
+export type SignupFormInputs = {
+  email: string;
+  password: string;
+};
 export function SignupForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormInputs>();
+  const dispatch = useAppDispatch();
+  const onSubmit = (data: SignupFormInputs) => {
+    console.log(data);
+    dispatch(createUser({ email: data.email, password: data.password }));
+  };
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
@@ -37,6 +44,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
+              {...register('email', { required: 'email is required' })}
             />
             <Input
               id="password"
@@ -45,14 +53,18 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoCorrect="off"
               disabled={isLoading}
+              {...register('password', { required: 'password is required' })}
             />
             <Input
               id="password"
               placeholder="confirm password"
-              type="password"
+              type="confirmPassword"
               autoCapitalize="none"
               autoCorrect="off"
               disabled={isLoading}
+              // {...register('confirmPassword', {
+              //   required: 'password is required',
+              // })}
             />
           </div>
           <Button disabled={isLoading}>

@@ -5,7 +5,7 @@ import GenreDropDown from '@/layouts/GenreDropDown';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/layouts/Navbar';
 import PublicationDateDropDown from '@/layouts/PublicationDateDropDown';
-import { useGetBooksQuery } from '@/redux/api/apiSlice';
+import { useGetBooksQuery } from '../redux/features/book/bookAPI';
 
 // import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
@@ -35,29 +35,35 @@ export default function Books() {
 
   return (
     <>
-      <Navbar></Navbar>
-      <div className="grid grid-cols-12 max-w-7xl mx-auto relative  ">
-        <div className="col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky top-16 h-[calc(100vh-80px)]">
-          <div className="space-y-3 ">
-            <div>
-              <GenreDropDown></GenreDropDown>
-            </div>
-            <div>
-              <PublicationDateDropDown></PublicationDateDropDown>
+      <div>
+        <Navbar></Navbar>
+      </div>
+      <div>
+        <div className="  grid grid-cols-12 max-w-7xl mx-auto relative  ">
+          <div className="my-32 col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky top-16 h-[calc(100vh-80px)]">
+            <div className="space-y-3 ">
+              <div>
+                <GenreDropDown></GenreDropDown>
+              </div>
+              <div>
+                <PublicationDateDropDown></PublicationDateDropDown>
+              </div>
             </div>
           </div>
+          <div className="col-span-9 my-32">
+            <div className=" grid grid-cols-3 gap-10 pb-20">
+              {data?.data.map((book: IBook) => (
+                <BookCard Book={book} />
+              ))}
+            </div>
+            <Button
+              className="absolute bottom-0 right-0"
+              onClick={() => navigate('/add-new-book')}
+            >
+              Add new Book
+            </Button>
+          </div>
         </div>
-        <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
-          {data?.data.map((book: IBook) => (
-            <BookCard Book={book} />
-          ))}
-        </div>
-        <Button
-          className="absolute bottom-0 right-0"
-          onClick={() => navigate('/add-new-book')}
-        >
-          Add new Book
-        </Button>
       </div>
     </>
   );

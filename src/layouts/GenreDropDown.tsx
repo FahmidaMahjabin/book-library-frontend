@@ -1,10 +1,16 @@
 import React from 'react';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
+import { useGetBooksQuery } from '../redux/features/book/bookAPI';
+import { IBook } from '@/types/globalTypes';
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 export default function GenreDropDown() {
+  const { data } = useGetBooksQuery(undefined);
+  console.log('data:', data?.data);
+  // get unique genre list for genre dropdown
+
   return (
     <div>
       <Menu as="div" className="relative inline-block text-left">
@@ -29,20 +35,23 @@ export default function GenreDropDown() {
         >
           <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
-                    )}
-                  >
-                    Account settings
-                  </a>
-                )}
-              </Menu.Item>
-              <Menu.Item>
+              {/* {data?.data?.map((book: IBook) => {
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      href="#"
+                      className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                        'block px-4 py-2 text-sm'
+                      )}
+                    >
+                      {book.genre}
+                    </a>
+                  )}
+                </Menu.Item>;
+              })} */}
+            </div>
+            {/* <Menu.Item>
                 {({ active }) => (
                   <a
                     href="#"
@@ -83,7 +92,7 @@ export default function GenreDropDown() {
                   )}
                 </Menu.Item>
               </form>
-            </div>
+            </div> */}
           </Menu.Items>
         </Transition>
       </Menu>

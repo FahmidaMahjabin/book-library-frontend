@@ -10,7 +10,7 @@ import {
   useEditBookMutation,
   usePostABookMutation,
   useSingleBookQuery,
-} from '@/redux/api/apiSlice';
+} from '@/redux/features/book/bookAPI';
 import {
   setAuthor,
   setGenre,
